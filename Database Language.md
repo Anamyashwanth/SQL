@@ -26,15 +26,15 @@ DML is the short name for Data Manipulation Language which deals with data manip
 
 DCL is short for Data Control Language which acts as an access specifier to the database.(basically to grant and revoke permissions to users in the database
 
-GRANT: grant permissions to the user for running DML(SELECT, INSERT, DELETE,…) commands on the table
-REVOKE: revoke permissions to the user for running DML(SELECT, INSERT, DELETE,…) command on the specified table
+1. GRANT: grant permissions to the user for running DML(SELECT, INSERT, DELETE,…) commands on the table.
+2. REVOKE: revoke permissions to the user for running DML(SELECT, INSERT, DELETE,…) command on the specified table.
 
 **Transactional Control Language (TCL)**
 
 TCL is short for Transactional Control Language which acts as an manager for all types of transactional data and all transactions. Some of the command of TCL are
 
-Roll Back: Used to cancel  or Undo changes made in the database 
-Commit: It is used to apply or save changes in the database
-Save Point: It is used to save the data on the temporary basis in the database
+1. Roll Back: Used to cancel  or Undo changes made in the database.
+2. Commit: It is used to apply or save changes in the database.
+3. Save Point: It is used to save the data on the temporary basis in the database.
    
 
