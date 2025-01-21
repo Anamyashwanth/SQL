@@ -17,4 +17,7 @@ USE database_name;
 # Drop database
 ``` sql
 Drop database database_name;
+
+DROP DATABASE IF EXISTS Database_Name;
+
 ```
