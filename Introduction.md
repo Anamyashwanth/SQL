@@ -13,3 +13,15 @@
 | **SQL Server** | • Enterprise business apps  <br>• Reporting & BI systems  <br>• Data Warehousing                    | • **Bank core systems**  <br>• **HR payroll software**  <br>• **Power BI reports** using SQL Server  <br>• ERP systems in MNCs                            |
 | **Oracle**     | • Mission-critical systems  <br>• Very large transactional systems  <br>• High availability systems | • **Banking transactions (ATM, UPI backend)**  <br>• **Railway reservation system**  <br>• **Telecom billing systems**  <br>• Large ERP (SAP, Oracle ERP) |
 | **PostgreSQL** | • Analytics & reporting  <br>• Complex queries  <br>• AI/ML data storage                            | • **Zomato / Swiggy analytics**  <br>• **GIS & mapping systems**  <br>• **Data science projects**  <br>• Government open-data portals                     |
+
+
+
+**ANSI SQL Standards**
+ANSI(American National Standards Institute) SQL is the official standard definition of SQL, created to ensure that SQL works consistently across different database systems.
+What Does ANSI SQL Standardize?
+ANSI SQL defines:
+<br>• Core SQL syntax
+<br>• Standard data types
+• How tables, views, joins, and constraints should behave
+• Transaction behavior (COMMIT, ROLLBACK)
+
