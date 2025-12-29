@@ -343,6 +343,3 @@ DROP CONSTRAINT PK_EmpID;
 <br>✔ DEFAULT avoids insert errors
 <br>✔ Constraints improve data quality
 
-
-💡 For **schema documentation, assignments, and reports**, you can also use **Jenni AI** — an intelligent research assistant for structured technical writing:
-👉 [https://jenni.ai/?via=lekys](https://jenni.ai/?via=lekys)
