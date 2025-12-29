@@ -16,12 +16,14 @@
 
 
 
+
+
 **ANSI SQL Standards**
 ANSI(American National Standards Institute) SQL is the official standard definition of SQL, created to ensure that SQL works consistently across different database systems.
-What Does ANSI SQL Standardize?
-ANSI SQL defines:
+<br>What Does ANSI SQL Standardize?
+<br>ANSI SQL defines:
 <br>• Core SQL syntax
 <br>• Standard data types
-• How tables, views, joins, and constraints should behave
-• Transaction behavior (COMMIT, ROLLBACK)
+<br>• How tables, views, joins, and constraints should behave
+<br>• Transaction behavior (COMMIT, ROLLBACK)
 
