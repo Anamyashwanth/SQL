@@ -360,10 +360,225 @@ SELECT * FROM Customers;
 
 ## 9. SQL Server Best Practices (SSMS)
 
-✔ Use `BIT` for boolean logic
-✔ Use `IDENTITY` for surrogate keys
-✔ Prefer `VARCHAR` over `NVARCHAR` unless Unicode is required
-✔ Avoid deprecated `TEXT` → use `VARCHAR(MAX)`
-✔ Match data type to real-world meaning
+<br>✔ Use `BIT` for boolean logic
+<br>✔ Use `IDENTITY` for surrogate keys
+<br>✔ Prefer `VARCHAR` over `NVARCHAR` unless Unicode is required
+<br>✔ Avoid deprecated `TEXT` → use `VARCHAR(MAX)`
+<br>✔ Match data type to real-world meaning
+
+
+
+# NULL vs NOT NULL in SQL Server (SSMS)
+
+## What is NULL?
+
+`NULL` represents the **absence of a value**.
+It does **not** mean:
+
+* `0`
+* Empty string (`''`)
+* False
+
+It means **unknown or not provided**.
+
+---
+
+## 1. NULL (Default Behavior)
+
+### 📌 What it means
+
+A column that allows `NULL` can store:
+
+* A value
+* Or **no value at all**
+
+If not specified, SQL Server **allows NULL by default**.
+
+---
+
+### Example: Column Allowing NULL
+
+```sql
+CREATE TABLE Employees (
+    EmpID INT,
+    MiddleName VARCHAR(50) NULL
+);
+```
+
+### Insert Data
+
+```sql
+INSERT INTO Employees VALUES (1, NULL);
+```
+
+### Output
+
+```sql
+SELECT * FROM Employees;
+```
+
+| EmpID | MiddleName |
+| ----: | ---------- |
+|     1 | NULL       |
+
+📌 `MiddleName` is optional.
+
+---
+
+## 2. NOT NULL
+
+### 📌 What it means
+
+`NOT NULL` enforces that **every row must have a value** for that column.
+
+### 📌 Why it is important
+
+* Ensures **data integrity**
+* Prevents missing critical information
+* Commonly used for **primary data fields**
+
+---
+
+### Example: Column with NOT NULL Constraint
+
+```sql
+CREATE TABLE Users (
+    UserID INT,
+    UserName VARCHAR(100) NOT NULL
+);
+```
+
+### Valid Insert
+
+```sql
+INSERT INTO Users VALUES (1, 'Alice');
+```
+
+### Output
+
+```sql
+SELECT * FROM Users;
+```
+
+| UserID | UserName |
+| -----: | -------- |
+|      1 | Alice    |
+
+---
+
+### Invalid Insert (Error Example)
+
+```sql
+INSERT INTO Users VALUES (2, NULL);
+```
+
+### SSMS Error Message
+
+```
+Cannot insert the value NULL into column 'UserName',
+table 'Users'; column does not allow nulls.
+INSERT fails.
+```
+
+---
+
+## 3. NULL vs NOT NULL (Side-by-Side)
+
+| Feature                | NULL     | NOT NULL |
+| ---------------------- | -------- | -------- |
+| Allows empty value     | ✅ Yes    | ❌ No     |
+| Default behavior       | ✅ Yes    | ❌ No     |
+| Data integrity         | ❌ Weaker | ✅ Strong |
+| Used for optional data | ✅ Yes    | ❌ No     |
+| Used for required data | ❌ No     | ✅ Yes    |
+
+---
+
+## 4. Checking for NULL Values
+
+⚠️ `NULL` **cannot be compared using `=`**
+
+### ❌ Incorrect
+
+```sql
+SELECT * FROM Employees
+WHERE MiddleName = NULL;
+```
+
+### ✅ Correct
+
+```sql
+SELECT * FROM Employees
+WHERE MiddleName IS NULL;
+```
+
+### Output
+
+| EmpID | MiddleName |
+| ----: | ---------- |
+|     1 | NULL       |
+
+---
+
+## 5. Using NOT NULL with DEFAULT
+
+### 📌 Best Practice
+
+Combine `NOT NULL` with `DEFAULT` to avoid insert errors.
+
+---
+
+### Example
+
+```sql
+CREATE TABLE Orders (
+    OrderID INT,
+    OrderStatus VARCHAR(20) NOT NULL DEFAULT 'Pending'
+);
+```
+
+### Insert Without Status
+
+```sql
+INSERT INTO Orders (OrderID)
+VALUES (1);
+```
+
+### Output
+
+```sql
+SELECT * FROM Orders;
+```
+
+| OrderID | OrderStatus |
+| ------: | ----------- |
+|       1 | Pending     |
+
+---
+
+
+## 6. Real-World Usage Examples
+
+| Column       | Recommended |
+| ------------ | ----------- |
+| Primary Key  | NOT NULL    |
+| Name         | NOT NULL    |
+| Email        | NOT NULL    |
+| Phone Number | NULL        |
+| Middle Name  | NULL        |
+| Created Date | NOT NULL    |
+
+---
+
+## Summary
+
+<br>✔ `NULL` = missing or unknown value
+<br>✔ `NOT NULL` = value required
+<br>✔ `NULL` is **not equal** to `0` or `''`
+<br>✔ Use `IS NULL` / `IS NOT NULL`
+<br>✔ Combine `NOT NULL` + `DEFAULT` for safer inserts
+
+
+
 
 
