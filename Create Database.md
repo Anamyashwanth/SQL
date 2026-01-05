@@ -1,12 +1,32 @@
+
+
 # Create database
 ``` sql
 Create database database_name;
 ```
 
-# Show databases
+# To view all the databases in system
 ``` sql
 select name
-from sys.databases;
+from sysdatabases;
+```
+
+# To view all system user details
+``` sql
+select name
+from sysusers;
+```
+
+# To view all login details
+``` sql
+select name
+from syslogins;
+```
+
+# To view all object details in the system
+``` sql
+select name
+from sysobjects;
 ```
 
 # view the information of database.
@@ -30,3 +50,5 @@ Drop database database_name;
 DROP DATABASE IF EXISTS Database_Name;
 
 ```
+
+
