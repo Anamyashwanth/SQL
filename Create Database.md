@@ -51,4 +51,27 @@ DROP DATABASE IF EXISTS Database_Name;
 
 ```
 
+# complete flow in one script
+```sql
+CREATE DATABASE CollegeDB;
+GO
 
+USE CollegeDB;
+GO
+
+CREATE TABLE Students (
+    StudentID INT,
+    StudentName VARCHAR(50),
+    Marks INT
+);
+GO
+
+INSERT INTO Students VALUES
+(1, 'Abc', 85),
+(2, 'Def', 72),
+(3, 'fgh', 90);
+GO
+
+SELECT * FROM Students;
+
+```
