@@ -1,0 +1,366 @@
+# 📘 OPERATORS Chapter
+
+## SQL Server (SSMS)
+
+---
+
+## 1️⃣ What are Operators in SQL?
+
+**Operators** are **symbols or keywords** used to **perform operations on data values** in SQL statements.
+
+👉 Operators help SQL:
+
+* Compare values
+* Perform calculations
+* Combine conditions
+* Work with ranges and strings
+
+> Operators are used **inside SQL commands**, especially with `SELECT`, `UPDATE`, and `DELETE`.
+
+---
+
+## 2️⃣ Why Operators are Important?
+
+Operators are important because:
+
+* SQL must make decisions (true / false)
+* Filtering data requires comparisons
+* Calculations are required in reports
+* Business rules depend on conditions
+
+👉 **Without operators, SQL cannot process logic.**
+
+---
+
+## 3️⃣ Categories of Operators in SQL Server
+
+SQL Server operators are broadly classified into:
+
+| Category             | Purpose                         |
+| -------------------- | ------------------------------- |
+| Arithmetic Operators | Perform mathematical operations |
+| Comparison Operators | Compare two values              |
+| Logical Operators    | Combine conditions              |
+| Assignment Operators | Assign or modify values         |
+| Range Operators      | Work with ranges and lists      |
+| String Operators     | Work with text data             |
+
+---
+
+# 🔹 1. Arithmetic Operators
+
+## 4️⃣ What are Arithmetic Operators?
+
+Arithmetic operators perform **mathematical calculations**.
+
+---
+
+### Operators List
+
+| Operator | Meaning             |
+| -------- | ------------------- |
+| `+`      | Addition            |
+| `-`      | Subtraction         |
+| `*`      | Multiplication      |
+| `/`      | Division            |
+| `%`      | Modulus (remainder) |
+
+---
+
+### Example
+
+```sql
+SELECT 20 + 5 AS AddResult,
+       20 - 5 AS SubResult,
+       20 * 5 AS MulResult,
+       20 / 5 AS DivResult,
+       20 % 3 AS ModResult;
+GO
+```
+
+### Explanation
+
+* Calculations happen at runtime
+* No table data is modified
+
+---
+
+# 🔹 2. Comparison Operators
+
+## 5️⃣ What are Comparison Operators?
+
+Comparison operators are used to **compare two values** and return TRUE or FALSE.
+
+---
+
+### Operators List
+
+| Operator    | Meaning               |
+| ----------- | --------------------- |
+| `=`         | Equal to              |
+| `!=` / `<>` | Not equal to          |
+| `>`         | Greater than          |
+| `<`         | Less than             |
+| `>=`        | Greater than or equal |
+| `<=`        | Less than or equal    |
+
+---
+
+### Example
+
+```sql
+SELECT *
+FROM Students
+WHERE Marks >= 75;
+GO
+```
+
+---
+
+# 🔹 3. Logical Operators
+
+## 6️⃣ What are Logical Operators?
+
+Logical operators are used to **combine multiple conditions**.
+
+---
+
+### Operators List
+
+| Operator | Meaning                        |
+| -------- | ------------------------------ |
+| AND      | All conditions must be true    |
+| OR       | Any one condition must be true |
+| NOT      | Negates a condition            |
+
+---
+
+### Example (AND)
+
+```sql
+SELECT *
+FROM Students
+WHERE Marks >= 70 AND Marks <= 90;
+GO
+```
+
+---
+
+### Example (OR)
+
+```sql
+SELECT *
+FROM Students
+WHERE Marks < 40 OR Marks > 90;
+GO
+```
+
+---
+
+### Example (NOT)
+
+```sql
+SELECT *
+FROM Students
+WHERE NOT Marks < 60;
+GO
+```
+
+---
+
+# 🔹 4. Assignment Operators
+
+## 7️⃣ What are Assignment Operators?
+
+Assignment operators are used **mainly in UPDATE statements** to assign or modify values.
+
+---
+
+### Operators List
+
+| Operator | Meaning             |
+| -------- | ------------------- |
+| `=`      | Assign value        |
+| `+=`     | Add and assign      |
+| `-=`     | Subtract and assign |
+| `*=`     | Multiply and assign |
+| `/=`     | Divide and assign   |
+
+---
+
+### Example
+
+```sql
+UPDATE Students
+SET Marks += 5;
+GO
+```
+
+### Explanation
+
+* Adds 5 to Marks for all rows
+* Equivalent to `Marks = Marks + 5`
+
+---
+
+# 🔹 5. Range Operators
+
+## 8️⃣ What are Range Operators?
+
+Range operators check whether a value lies **within a range or a set of values**.
+
+---
+
+### Operators List
+
+| Operator    | Purpose                 |
+| ----------- | ----------------------- |
+| BETWEEN     | Value within a range    |
+| NOT BETWEEN | Value outside range     |
+| IN          | Match any value in list |
+| NOT IN      | Exclude list values     |
+
+---
+
+### BETWEEN Example
+
+```sql
+SELECT *
+FROM Students
+WHERE Marks BETWEEN 60 AND 80;
+GO
+```
+
+✔ Both limits are **inclusive**
+
+---
+
+### IN Example
+
+```sql
+SELECT *
+FROM Students
+WHERE StudentID IN (1, 3, 5);
+GO
+```
+
+---
+
+### NOT IN Warning
+
+```sql
+-- Dangerous if NULL exists
+WHERE StudentID NOT IN (1, 2, NULL);
+```
+
+📌 NOT IN fails if list contains NULL.
+
+---
+
+# 🔹 6. String Operators
+
+## 9️⃣ What are String Operators?
+
+String operators work with **text (character) data**.
+
+---
+
+### String Operators List
+
+| Operator | Purpose             |
+| -------- | ------------------- |
+| `+`      | Concatenate strings |
+| LIKE     | Pattern matching    |
+| NOT LIKE | Exclude pattern     |
+
+---
+
+### String Concatenation Example
+
+```sql
+SELECT StudentName + ' scored ' + CAST(Marks AS VARCHAR)
+FROM Students;
+GO
+```
+
+---
+
+### LIKE Operator (Pattern Matching)
+
+| Pattern | Meaning                  |
+| ------- | ------------------------ |
+| `%`     | Any number of characters |
+| `_`     | Exactly one character    |
+
+---
+
+### LIKE Examples
+
+```sql
+-- Starts with A
+WHERE StudentName LIKE 'A%';
+
+-- Ends with n
+WHERE StudentName LIKE '%n';
+
+-- Contains ash
+WHERE StudentName LIKE '%ash%';
+```
+
+---
+
+# 🔹 7. Operator Precedence
+
+## 🔟 What is Operator Precedence?
+
+Operator precedence defines **which operator is evaluated first**.
+
+### Order (High → Low)
+
+1. `*`, `/`, `%`
+2. `+`, `-`
+3. Comparison operators
+4. NOT
+5. AND
+6. OR
+
+---
+
+### Example
+
+```sql
+SELECT *
+FROM Students
+WHERE Marks > 60 AND Marks < 90 OR StudentID = 1;
+GO
+```
+
+✔ Use parentheses for clarity.
+
+---
+
+## 1️⃣1️⃣ Using Parentheses (Best Practice)
+
+```sql
+SELECT *
+FROM Students
+WHERE (Marks > 60 AND Marks < 90)
+   OR StudentID = 1;
+GO
+```
+
+---
+
+## 1️⃣2️⃣ Common Operator Mistakes
+
+❌ Using `=` instead of `IS NULL`
+❌ Forgetting parentheses
+❌ Misusing AND / OR
+❌ NOT IN with NULL values
+❌ Using LIKE incorrectly
+
+---
+
+## 🧠 One-Line Memory (Interview Gold)
+
+> **Operators perform operations on data, clauses organize SQL queries.**
