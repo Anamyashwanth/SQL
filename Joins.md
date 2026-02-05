@@ -1,0 +1,355 @@
+# JOINS
+
+---
+
+## 1. What is a JOIN?
+
+A **JOIN** is used to **combine data from two or more tables** based on a **related column** between them.
+
+* JOIN helps retrieve meaningful data from normalized tables
+* Tables are usually related using **primary key and foreign key**
+* JOIN does not change data, it only fetches data
+
+---
+
+## 2. Why JOIN is required?
+
+JOIN is required because:
+
+* Data is stored in multiple tables (normalization)
+* One table alone cannot give complete information
+* We need combined data for reports and analysis
+
+Example:
+
+* One table has employee details
+* Another table has department details
+* JOIN combines both
+
+---
+
+## 3. Basic JOIN syntax
+
+```sql
+SELECT column_list
+FROM table1
+JOIN table2
+ON join_condition;
+```
+
+* `table1` → first table
+* `table2` → second table
+* `ON` → condition to match rows
+
+---
+
+## 4. Types of JOINs in SQL Server
+
+SQL Server supports the following joins:
+
+* INNER JOIN
+* LEFT JOIN (LEFT OUTER JOIN)
+* RIGHT JOIN (RIGHT OUTER JOIN)
+* FULL JOIN (FULL OUTER JOIN)
+* CROSS JOIN
+* SELF JOIN
+
+---
+
+## 5. INNER JOIN
+
+### What is INNER JOIN?
+
+INNER JOIN returns **only matching rows** from both tables.
+
+* Rows without match are excluded
+* Most commonly used join
+
+---
+
+### INNER JOIN syntax
+
+```sql
+SELECT column_list
+FROM table1
+INNER JOIN table2
+ON table1.column = table2.column;
+```
+
+---
+
+### INNER JOIN example
+
+```sql
+SELECT e.eid, e.name, d.dept_name
+FROM tbl_emp e
+INNER JOIN tbl_dept d
+ON e.dept_id = d.dept_id;
+```
+
+Explanation:
+
+* Rows with matching `dept_id` in both tables are returned
+* Unmatched records are ignored
+
+---
+
+## 6. LEFT JOIN (LEFT OUTER JOIN)
+
+### What is LEFT JOIN?
+
+LEFT JOIN returns:
+
+* All rows from **left table**
+* Matching rows from **right table**
+* NULL for unmatched right table rows
+
+---
+
+### LEFT JOIN syntax
+
+```sql
+SELECT column_list
+FROM table1
+LEFT JOIN table2
+ON table1.column = table2.column;
+```
+
+---
+
+### LEFT JOIN example
+
+```sql
+SELECT e.eid, e.name, d.dept_name
+FROM tbl_emp e
+LEFT JOIN tbl_dept d
+ON e.dept_id = d.dept_id;
+```
+
+Explanation:
+
+* All employees are shown
+* If department does not exist, dept_name is NULL
+
+---
+
+## 7. RIGHT JOIN (RIGHT OUTER JOIN)
+
+### What is RIGHT JOIN?
+
+RIGHT JOIN returns:
+
+* All rows from **right table**
+* Matching rows from **left table**
+* NULL for unmatched left table rows
+
+---
+
+### RIGHT JOIN syntax
+
+```sql
+SELECT column_list
+FROM table1
+RIGHT JOIN table2
+ON table1.column = table2.column;
+```
+
+---
+
+### RIGHT JOIN example
+
+```sql
+SELECT e.eid, e.name, d.dept_name
+FROM tbl_emp e
+RIGHT JOIN tbl_dept d
+ON e.dept_id = d.dept_id;
+```
+
+Explanation:
+
+* All departments are shown
+* Employees missing for a department appear as NULL
+
+---
+
+## 8. FULL JOIN (FULL OUTER JOIN)
+
+### What is FULL JOIN?
+
+FULL JOIN returns:
+
+* All rows from both tables
+* Matching rows are combined
+* Unmatched rows show NULLs
+
+---
+
+### FULL JOIN syntax
+
+```sql
+SELECT column_list
+FROM table1
+FULL JOIN table2
+ON table1.column = table2.column;
+```
+
+---
+
+### FULL JOIN example
+
+```sql
+SELECT e.eid, e.name, d.dept_name
+FROM tbl_emp e
+FULL JOIN tbl_dept d
+ON e.dept_id = d.dept_id;
+```
+
+Explanation:
+
+* Includes matched and unmatched rows from both tables
+
+---
+
+## 9. CROSS JOIN
+
+### What is CROSS JOIN?
+
+CROSS JOIN returns the **Cartesian product** of both tables.
+
+* Every row of table1 is combined with every row of table2
+* No ON condition is required
+
+---
+
+### CROSS JOIN syntax
+
+```sql
+SELECT column_list
+FROM table1
+CROSS JOIN table2;
+```
+
+---
+
+### CROSS JOIN example
+
+```sql
+SELECT e.name, d.dept_name
+FROM tbl_emp e
+CROSS JOIN tbl_dept d;
+```
+
+Explanation:
+
+* If table1 has 5 rows and table2 has 3 rows
+* Result will have 15 rows
+
+---
+
+## 10. SELF JOIN
+
+### What is SELF JOIN?
+
+SELF JOIN is a join where a table is joined **with itself**.
+
+* Used for hierarchical or relational data
+* Requires table aliases
+
+---
+
+### SELF JOIN example
+
+```sql
+SELECT e.name AS Employee, m.name AS Manager
+FROM tbl_emp e
+LEFT JOIN tbl_emp m
+ON e.manager_id = m.eid;
+```
+
+Explanation:
+
+* Same table is used twice
+* One instance represents employee
+* Other represents manager
+
+---
+
+## 11. JOIN with WHERE clause
+
+```sql
+SELECT e.name, d.dept_name
+FROM tbl_emp e
+INNER JOIN tbl_dept d
+ON e.dept_id = d.dept_id
+WHERE d.dept_name = 'IT';
+```
+
+Explanation:
+
+* JOIN matches rows
+* WHERE filters the result further
+
+---
+
+## 12. JOIN vs WHERE (old style join)
+
+Old style (not recommended):
+
+```sql
+SELECT *
+FROM tbl_emp e, tbl_dept d
+WHERE e.dept_id = d.dept_id;
+```
+
+Modern style (recommended):
+
+```sql
+SELECT *
+FROM tbl_emp e
+INNER JOIN tbl_dept d
+ON e.dept_id = d.dept_id;
+```
+
+Reason:
+
+* Better readability
+* Less chance of mistakes
+
+---
+
+## 13. JOIN execution order (logical)
+
+SQL Server processes joins logically as:
+
+1. FROM
+2. JOIN
+3. ON
+4. WHERE
+5. SELECT
+6. ORDER BY
+
+---
+
+## 14. Performance considerations
+
+* Always join on indexed columns
+* Avoid SELECT * with joins
+* Use proper join type
+* Filter rows early using WHERE
+* Avoid unnecessary joins
+
+---
+
+## 15. Common JOIN mistakes
+
+* Missing ON condition
+* Using wrong join type
+* Confusing LEFT and RIGHT join
+* Using CROSS JOIN unintentionally
+* Forgetting table aliases
+
+---
+
+## 16. One-line exam / interview memory
+
+JOIN is used to combine rows from two or more tables based on a related column.
